@@ -1,70 +1,17 @@
-# Getting Started with Create React App
+# section 02
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- QueryClient를 생성해서 QueryProvider에 추가한다
+  - 모든 자식 컴포넌트가 캐시와 훅을 사용할 수 있게 된다.
+- useQuery 훅을 실행해서 데이터를 서버에서 가져오고 최신 상태인지 확인 할 수 있다.
+  - 반환 객체에는 isLoading, isFetching, Error가 있는데 특정 쿼리의 상태를 사용자에게 알려줄때 사용한다.
+- staleTime은 윈도우가 다시 포커스될 때 같은 특정 트리거에서 쿼리 데이터를 다시 가져올지를 결정한다.
 
-## Available Scripts
+  - 즉, staleTime은 데이터가 사용 가능한 상태로 유지되는 시간
+  - 서버로 돌아가 데이터가 여전히 정확한지 확인해야 하는 시점까지
 
-In the project directory, you can run:
+- cacheTime은 데이터가 비활성화된 이후 남아 있는 시간을 말한다.
+  - 캐시된 데이터는 쿼리를 다시 실행했을 때 사용된다.
+  - 데이터가 최신 상태인지 서버에서 확인하는 동안 자리 표시자로 사용자에게 보여지게 된다.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+쿼리 키가 변경 됐을 때 useQuery hook은 쿼리를 반복한다.
+그래서 데이터 함수가 바뀌면 쿼리 키도 바뀌게 된다. 데이터를 변경해야 하는 경우 다시 실행할 수 있도록

@@ -36,7 +36,7 @@ interface UseAppointments {
   setShowAll: Dispatch<SetStateAction<boolean>>;
 }
 
-export function useAppointments(): UseAppointments {
+export const useAppointments = (): UseAppointments => {
   const currentMonthYear = getMonthYearDetails(dayjs());
 
   const [monthYear, setMonthYear] = useState(currentMonthYear);
@@ -80,4 +80,4 @@ export function useAppointments(): UseAppointments {
   );
 
   return { appointments, monthYear, updateMonthYear, showAll, setShowAll };
-}
+};
